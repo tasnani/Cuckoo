@@ -26,7 +26,7 @@ public class jobdataEntry {
 		JTextField expectedDuration=new JTextField();
 		JTextField subject=new JTextField();
 		JButton jbSubmit=new JButton("Submit Job");
-		jbSubmit.setBounds(180,230, 100,50);
+		jbSubmit.setBounds(400,320, 100,50);
 		String[] daysoftheWeek={"Monday", "Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
 		JComboBox day=new JComboBox(daysoftheWeek);
 		day.setSelectedIndex(0);
@@ -196,7 +196,8 @@ public class jobdataEntry {
 		
 	
 		JButton Begin=new JButton("Begin Scheduling");
-		Begin.setBounds(180,275, 100,50);
+		Begin.setBounds(0,320, 150,50);
+		
 		
 		Begin.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent event){
 			s = new scheduling(spreadsheet.generateAvailableTimes());
@@ -206,6 +207,8 @@ public class jobdataEntry {
 			js.add(j);
 			s.jobs = js;
 			s.scheduleJobs();
+			jobdataDisplay jdd=new jobdataDisplay();
+			jdd.jobdataDisplayInterface();
 			
 			}
 		});
