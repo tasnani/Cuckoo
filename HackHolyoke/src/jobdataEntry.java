@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.util.ArrayList;
 public class jobdataEntry {
+	public static scheduling s;
 	public ArrayList<Job> createJobs = new ArrayList<Job>();
 	int countID = 1;
 	public Job createJob(int expectedDuration, String subject, int dayOfTheWeek, int time){
@@ -201,6 +202,7 @@ public class jobdataEntry {
 			scheduling s = new scheduling(spreadsheet.generateAvailableTimes());
 			s.jobs = createJobs;
 			s.scheduleJobs();
+			//
 			}
 		});
 		
