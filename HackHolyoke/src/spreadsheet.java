@@ -1,37 +1,41 @@
-import java.awt.Color;
+import java.awt.Color; 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.*;
 
 
-public class spreadsheet {
+public class spreadsheet implements ActionListener {
 	public void spreadsheetDisplay(){
 		JFrame jFrame2=new JFrame();
-		jFrame2.setSize(1600,790);
+		jFrame2.setSize(1100,810);
 		jFrame2.setBackground(Color.BLACK);
-		jFrame2.setVisible(true);
-		jFrame2.setLayout(null);
+		
+		
 		
 		
 		
 		ArrayList<JLabel> jLabelArrayList=new ArrayList<>();
-		for(int k=0;k<25;k++){
+		for(int k=0;k<24;k++){
 			String s="j"+k;
 			JLabel t=new JLabel();
 			t.setBackground(Color.BLACK);
 			//t.setForeground(Color.WHITE);
 			t.setFont(new Font("Seravik", Font.PLAIN, 12));
 			t.setLayout(null);
-			t.setBounds(0,30*k, 100, 50);
+			t.setBounds(0,(int)31.5*k, 100, 50);
+			
 			jLabelArrayList.add(t);
 			jFrame2.add(t);
+			t.setVisible(true);
 		}
 		boolean b=false;
 		String minutes="";
 		int f=8;
 		int count=0;
-		for(int u=0;u<25;u++){
+		for(int u=0;u<24;u++){
 			
 			if(b!=true){
 				 minutes="30";
@@ -51,7 +55,9 @@ public class spreadsheet {
 			jLabelArrayList.get(u).setText(String.valueOf(f)+":"+String.valueOf(minutes));
 			jLabelArrayList.get(u).setBackground(Color.BLACK);
 			//jLabelArrayList.get(u).setForeground(Color.WHITE);
+			
 			jLabelArrayList.get(u).setLayout(null);
+			jLabelArrayList.get(u).setVisible(true);
 			count++;
 			
 			
@@ -63,7 +69,7 @@ public class spreadsheet {
 			String stt="j"+(30+y);
 			JLabel tempp=new JLabel();
 			
-			tempp.setBounds(50+150*y,0,150,150);
+			tempp.setBounds(75+150*y,0,150,25);
 			
 			tempp.setText(daysWeek[y]);
 			//tempp.setForeground(Color.WHITE);
@@ -71,31 +77,72 @@ public class spreadsheet {
 			tempp.setLayout(null);
 			tempp.setFont(new Font("Seravik", Font.PLAIN, 12));
 			jLabelDaysArrayList.add(tempp);
+			jLabelDaysArrayList.get(y).setVisible(true);
 			jFrame2.add(tempp);
+			
+		}
+		for(int o=0;o<7;o++){
+			jLabelDaysArrayList.get(o).setVisible(true);
 		}
 		
 		ArrayList<JButton> jButtonArrayList=new ArrayList<>();
+		ArrayList<String> buttonNo=new ArrayList<>();
+		//blah
+		int cnt=0;
 		for(int q=0;q<7;q++)
 		{
 		for(int i=0;i<24;i++){
 			
-			String st="b"+i;
+			String st="b"+cnt;
 			JButton temp=new JButton();
 			temp.setLayout(null);
 			temp.setBackground(Color.BLACK);
-			temp.setBounds(200+25*q,75+15*i,100,25);
+			temp.setBounds(50+150*q,25+31*i,100,25);
+			//temp.setBorderPainted(false);
+			temp.setOpaque(true);
+			temp.setBackground(Color.RED);
+			temp.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent event){
+				temp.setBackground(Color.green);
+				buttonNo.add(st);
+			}
+			});
+			
+			
 			jButtonArrayList.add(temp);
 			jFrame2.add(temp);
+			temp.setVisible(true);
+			cnt++;
 		}
 		
 		}
+		for(int g=0;g<168;g++){
+			jButtonArrayList.get(g).setVisible(true);
+				
+			}
+		
+		
+		jFrame2.setLayout(null);
+		jFrame2.setVisible(true);
+		}
 		
 		
 		
-	}
+	
 	public static void main(String arg[]){
 		spreadsheet s=new spreadsheet();
 		s.spreadsheetDisplay();
 	}
+
+
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	
 
 }
