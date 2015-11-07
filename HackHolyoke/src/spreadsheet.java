@@ -8,6 +8,7 @@ import javax.swing.*;
 
 
 public class spreadsheet implements ActionListener {
+	public static ArrayList<String> buttonNo=new ArrayList<>();
 	public void spreadsheetDisplay(){
 		JFrame jFrame2=new JFrame();
 		jFrame2.setSize(1100,810);
@@ -86,14 +87,14 @@ public class spreadsheet implements ActionListener {
 		}
 		
 		ArrayList<JButton> jButtonArrayList=new ArrayList<>();
-		ArrayList<String> buttonNo=new ArrayList<>();
+		
 		//blah
 		int cnt=0;
 		for(int q=0;q<7;q++)
 		{
 		for(int i=0;i<24;i++){
 			
-			String st="b"+cnt;
+			String st=""+q+" "+i;
 			JButton temp=new JButton();
 			temp.setLayout(null);
 			temp.setBackground(Color.BLACK);
@@ -103,7 +104,9 @@ public class spreadsheet implements ActionListener {
 			temp.setBackground(Color.RED);
 			temp.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent event){
 				temp.setBackground(Color.green);
+				System.out.println(st);
 				buttonNo.add(st);
+				
 			}
 			});
 			
@@ -133,7 +136,7 @@ public class spreadsheet implements ActionListener {
 		s.spreadsheetDisplay();
 	}
 
-
+	
 
 
 	@Override
@@ -141,6 +144,15 @@ public class spreadsheet implements ActionListener {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public static int[][] generateAvailableTimes(){
+		int[][] scheduleTimes = new int[7][24];
+		for(String s : buttonNo){
+			String[] nums = s.split(" ");
+			scheduleTimes[Integer.parseInt(nums[0])][Integer.parseInt(nums[1])] = 1;
+		}
+		return scheduleTimes;
+		}
 
 
 	

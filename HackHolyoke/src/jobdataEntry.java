@@ -5,10 +5,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
-
+import java.util.ArrayList;
 public class jobdataEntry {
 	public ArrayList<Job> createJobs = new ArrayList<Job>();
+	int countID = 1;
 	public Job createJob(int expectedDuration, String subject, int dayOfTheWeek, int time){
+		Date deadline = new Date(dayOfTheWeek, time);
+		Job j = new Job(expectedDuration, subject, countID++, deadline);
+		j.updateExpectedDuration();
+		return j;
 		
 	}
 	public void jobdataEntryDisplay(){
@@ -56,7 +61,7 @@ public class jobdataEntry {
 			case "Thursday": dayoftheWeekInteger=3;
 			case "Friday": dayoftheWeekInteger=4;
 			case "Saturday": dayoftheWeekInteger=5;
-			case "Sunday": dayoftheWeekInteger=6;
+			default: dayoftheWeekInteger=6;
 			
 			}
 			
@@ -171,14 +176,14 @@ public class jobdataEntry {
 			
 			
 			}
-			if(hourValue==19 & intervalValue==30){
+			else{
 				hourIntegerValue=23;
 			
 			
 			}
 			
 			int expectedDurationValueTwice=Integer.parseInt(expectedDurationValue)*2;
-			
+			createJobs.add(createJob(expectedDurationValueTwice, subjecText, dayoftheWeekInteger, hourIntegerValue ));
 			subject.setText("");
 			expectedDuration.setText("");
 			mySpinner.setValue(0);
@@ -189,9 +194,15 @@ public class jobdataEntry {
 		}});
 		
 	
+		JButton Begin=new JButton("Begin Scheduling");
+		Begin.setBounds(180,275, 100,50);
 		
-		
-		
+		Begin.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent event){
+			scheduling s = new scheduling(spreadsheet.generateAvailableTimes());
+			s.jobs = createJobs;
+			s.scheduleJobs();
+			}
+		});
 		
 		//Dimension d=new Dimension(50,50);
 		//mySpinner.setPreferredSize(d);
@@ -214,7 +225,7 @@ public class jobdataEntry {
         jFrame3.add(day);
         jFrame3.add(dayLabel);
         jFrame3.add(jbSubmit);
-        
+        jFrame3.add(Begin);
         jFrame3.add(spinnerLabel);
         jFrame3.add(spinnerLabel2);
 		jFrame3.add(mySpinner);
