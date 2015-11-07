@@ -5,8 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 import java.util.ArrayList;
-public class jobdataEntry {
+public class jobdataEntry implements ChangeListener{
 	public static scheduling s;
 	public ArrayList<Job> createJobs = new ArrayList<Job>();
 	int countID = 1;
@@ -29,30 +32,38 @@ public class jobdataEntry {
 		jbSubmit.setBounds(400,320, 100,50);
 		String[] daysoftheWeek={"Monday", "Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
 		JComboBox day=new JComboBox(daysoftheWeek);
-		day.setSelectedIndex(0);
+		//day.setSelectedIndex(0);
 		day.setBounds(180,150,200,200);
 		JLabel dayLabel=new JLabel("Day");
 		dayLabel.setBounds(125,235,150,35);
 		JLabel spinnerLabel=new JLabel("Interval");
 		spinnerLabel.setBounds(70,160,150,35);
 		
-		JLabel spinnerLabel2=new JLabel("Hours");
+		JLabel spinnerLabel2=new JLabel("Hour");
 		spinnerLabel2.setBounds(220,160,150,35);
 		
-		JSpinner mySpinner = new JSpinner();
-		JSpinner mySpinner2=new JSpinner();
+		JTextField mySpinner = new JTextField();
+		JTextField mySpinner2=new JTextField();
 		
-		
+		/*
 		mySpinner.setModel(new SpinnerNumberModel(0,0,30,30));
 		mySpinner2.setModel(new SpinnerNumberModel(8,8,19,1));
+		mySpinner.setValue(0);
+		mySpinner.setValue(8);
+		
+*/
+		
 		mySpinner.setBounds(150,150,50,50);
 		mySpinner2.setBounds(280,150,50,50);
+		
+		mySpinner.setText("0");
+		mySpinner2.setText("8");
 		jbSubmit.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent event){
 			String subjecText=subject.getText();
 			String expectedDurationValue=expectedDuration.getText();
 			String dayoftheWeek=day.getSelectedItem().toString();
-			int intervalValue=(int)mySpinner.getValue();
-			int hourValue=(int)mySpinner2.getValue();
+			int intervalValue=Integer.parseInt(mySpinner.getText());
+			int hourValue=Integer.parseInt(mySpinner2.getText());
 			int dayoftheWeekInteger;
 			
 			switch(dayoftheWeek){
@@ -187,8 +198,8 @@ public class jobdataEntry {
 			createJobs.add(createJob(expectedDurationValueTwice, subjecText, dayoftheWeekInteger, hourIntegerValue ));
 			subject.setText("");
 			expectedDuration.setText("");
-			mySpinner.setValue(0);
-			mySpinner2.setValue(8);
+			mySpinner.setText("0");
+			mySpinner2.setText("8");
 			day.setSelectedIndex(0);
 			
 			
@@ -202,10 +213,10 @@ public class jobdataEntry {
 		Begin.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent event){
 			s = new scheduling(spreadsheet.generateAvailableTimes());
 			Job j = new Job(3, "math", 2, new Date(4, 7));
-			//s.jobs = createJobs;
-			ArrayList<Job> js = new ArrayList<Job>();
-			js.add(j);
-			s.jobs = js;
+			s.jobs = createJobs;
+			//ArrayList<Job> js = new ArrayList<Job>();
+			//js.add(j);
+			//s.jobs = js;
 			s.scheduleJobs();
 			jobdataDisplay jdd=new jobdataDisplay();
 			jdd.jobdataDisplayInterface();
@@ -248,6 +259,11 @@ public class jobdataEntry {
 	public static void main(String[] s){
 		jobdataEntry jbed=new jobdataEntry();
 		jbed.jobdataEntryDisplay();
+	}
+	@Override
+	public void stateChanged(ChangeEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

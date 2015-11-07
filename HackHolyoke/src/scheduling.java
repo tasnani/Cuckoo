@@ -20,20 +20,26 @@ public class scheduling {
 	
 	//does the job scheduling
 	public void scheduleJobs(){
-		System.out.println("hi");
+		
+		
+		
 		for(int i = 0; i<7; i++)
-			for(int k = 0; k<24; k++)
-				this.jobSchedule[i][k] = -1;
+			for(int k = 0; k<24; k++){
+				this.jobSchedule[i][k] = -1;}
 		int currentJob = 0; //index of job
 		
 		Collections.sort(this.jobs);
+		
 		int timeLeft = 0;
 		int count = 0; //fencepost
 		for(int i = 0; i<7; i++)
 			for(int j = 0; j<24; j++){
 				if(currentJob == this.jobs.size()) {jobSchedule[i][j]=-1; continue;}//ran out of jobs
-				if(selectedTimes[i][j]==1){
+				
+				if(this.selectedTimes[i][j]==1){
+					
 					if(timeLeft==0 && currentJob==0 && count == 0){ 
+						
 						jobs.get(0).startTime = new Date(i, j); 
 						timeLeft = jobs.get(currentJob).timeLeft;
 						count++;
@@ -41,12 +47,14 @@ public class scheduling {
 					if(timeLeft == 0){
 						jobs.get(0).endTime = new Date(i, j); 
 						currentJob++;
-						if(currentJob == jobs.size()){jobSchedule[i][j]=-1; continue;} //ran out of jobs!
+						if(currentJob == this.jobs.size()){jobSchedule[i][j]=-1; continue;} //ran out of jobs!
 						timeLeft = jobs.get(currentJob).timeLeft;
 						jobs.get(currentJob).startTime = new Date(i, j);
 					}
 					timeLeft--;
+					System.out.println(jobs.get(currentJob).ID);
 					jobSchedule[i][j]=jobs.get(currentJob).ID;
+					
 				}
 			}
 	}

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.border.LineBorder;
 
 public class jobdataDisplay {
 	public void jobdataDisplayInterface(){
@@ -89,19 +90,23 @@ public class jobdataDisplay {
 		ArrayList<JLabel> jLabelArrayList2=new ArrayList<>();
 		
 		//blah
-		JLabel temp = new JLabel();;
+		JLabel temp = new JLabel();
+		//LineBorder thickBorder = new LineBorder(Color.BLUE, 12);
 		int cnt=0;
 		for(int q=0;q<7;q++)
 		{
 		for(int i=0;i<24;i++){
 			
 			String st=""+q+" "+i;
-			temp=new JLabel(String.valueOf(jobdataEntry.s.jobSchedule[q][i]));
+			if(jobdataEntry.s.jobSchedule[q][i]==-1){
+				temp=new JLabel(String.valueOf("--"));
+			}else{
+			temp=new JLabel(String.valueOf(jobdataEntry.s.jobSchedule[q][i]));}
 
-			System.out.println("here");
+			
 				
 			temp.setLayout(null);
-			temp.setBackground(Color.BLUE);
+			temp.setBackground(Color.CYAN);
 			temp.setBounds(50+150*q,25+31*i,100,25);
 			//temp.setBorderPainted(false);
 			temp.setOpaque(true);

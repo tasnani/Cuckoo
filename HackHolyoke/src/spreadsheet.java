@@ -146,11 +146,16 @@ public class spreadsheet implements ActionListener {
 	}
 	
 	public static int[][] generateAvailableTimes(){
+		
 		int[][] scheduleTimes = new int[7][24];
+		for(int i = 0; i<7; i++)
+			for(int k = 0; k<24; k++)
+				scheduleTimes[i][k]=0;
 		for(String s : buttonNo){
 			String[] nums = s.split(" ");
 			scheduleTimes[Integer.parseInt(nums[0])][Integer.parseInt(nums[1])] = 1;
 		}
+		
 		return scheduleTimes;
 		}
 
