@@ -3,8 +3,9 @@ import java.util.ArrayList;
 
 //finishTimeAcc looks at assignment types and history of job completion. Calculates accuracy of estimated completion
 //versus actual completion time determined from startTime and finishTime. Defaults to 100% accuracy
-public class Job {
+public class Job implements Comparable<Job>{
 	public static HashMap<String, Double> subject_finishTimeAcc = new HashMap<String, Double>();
+	public int timeLeft; //how much more time needed for completion
 	public int ID; //unique ID for schedule array as identifier
 	public int expectedDuration; //used for the schedule calculation. Based of user entered data + probability
 	public String subject;
@@ -26,6 +27,7 @@ public class Job {
 	//takes into account probability
 	public void updateExpectedDuration(){
 		this.expectedDuration = (int) (this.expectedDuration*Job.subject_finishTimeAcc.get(this.subject));
+		this.timeLeft = this.expectedDuration;
 	}
 	
 	public Job(int expectedDuration, String subject, int ID, Date hardDueDate, int weightedImportance){
@@ -39,6 +41,12 @@ public class Job {
 	
 	public int length(Date start, Date end){
 		return (end.day-start.day)*24 + end.time - start.time; 
+	}
+	//least lateness scheduling
+	@Override
+	public int compareTo(Job j) {
+		return length(new Date(0,0), this.hardDueDate) - length(new Date(0,0), j.hardDueDate);
+		
 	}
 	
 }
