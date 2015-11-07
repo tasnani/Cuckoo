@@ -20,6 +20,10 @@ public class scheduling {
 	
 	//does the job scheduling
 	public void scheduleJobs(){
+		System.out.println("hi");
+		for(int i = 0; i<7; i++)
+			for(int k = 0; k<24; k++)
+				this.jobSchedule[i][k] = -1;
 		int currentJob = 0; //index of job
 		
 		Collections.sort(this.jobs);

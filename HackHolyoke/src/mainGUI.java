@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.*;
 import javax.swing.ImageIcon;
 import java.awt.image.BufferedImage;
@@ -130,6 +132,14 @@ public class mainGUI {
 	
 	tf1.setLayout(null);
 	tf2.setLayout(null);
+	
+	button1.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent event){
+		spreadsheet ss=new spreadsheet();
+		ss.spreadsheetDisplay();
+		jobdataEntry jde=new jobdataEntry();
+		jde.jobdataEntryDisplay();
+		
+	}});
 	
 	
 	button1.setVisible(true);

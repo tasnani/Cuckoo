@@ -199,10 +199,14 @@ public class jobdataEntry {
 		Begin.setBounds(180,275, 100,50);
 		
 		Begin.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent event){
-			scheduling s = new scheduling(spreadsheet.generateAvailableTimes());
-			s.jobs = createJobs;
+			s = new scheduling(spreadsheet.generateAvailableTimes());
+			Job j = new Job(3, "math", 2, new Date(4, 7));
+			//s.jobs = createJobs;
+			ArrayList<Job> js = new ArrayList<Job>();
+			js.add(j);
+			s.jobs = js;
 			s.scheduleJobs();
-			//
+			
 			}
 		});
 		
